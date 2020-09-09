@@ -19,7 +19,6 @@ class CreateQuizTable extends Migration
             $table->string('category');
             $table->string('description');
             $table->string('lang');
-            $table->timestamps();
         });
     }
 

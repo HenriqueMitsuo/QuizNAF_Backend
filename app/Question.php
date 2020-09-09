@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Question extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'city', 'educationType', 'educationInstitute', 'educationCourse'
+        'title', 'trueAlternative', 'falseAlternative1', 'falseAlternative2', 'quiz_id'
     ];
 
     /**
@@ -20,7 +20,5 @@ class User extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-    ];
+    protected $hidden = [];
 }

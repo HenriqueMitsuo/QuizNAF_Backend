@@ -20,7 +20,6 @@ class CreateQuestionsTable extends Migration
             $table->string('falseAlternative1');
             $table->string('falseAlternative2');
             $table->foreignId('quiz_id')->constrained('quiz');
-            $table->timestamps();
         });
     }
 
