@@ -14,8 +14,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-
+$router->post('/register', ['uses' => 'UsersController@store']);
 $router->group(['prefix' => 'api'], function () use ($router) {
+    
 
     $router->group(['prefix' => 'quiz'], function () use ($router){
         $router->get('/', ['uses' => 'QuizController@index']);
@@ -31,5 +32,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('/', ['uses' => 'QuestionsController@store']);
         $router->put('/{id}', ['uses' => 'QuestionsController@update']);
         $router->delete('/{id}', ['uses' => 'QuestionsController@delete']);
+    });
+
+    $router->group(['prefix' => 'users'], function () use ($router){
+        $router->get('/{id}', ['uses' => 'UsersController@show']);
+        $router->put('/{id}', ['uses' => 'UsersController@update']);
+        $router->delete('/{id}', ['uses' => 'UsersController@delete']);
     });
 });

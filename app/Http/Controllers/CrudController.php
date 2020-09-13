@@ -32,6 +32,8 @@ abstract class CrudController extends Controller
 
     public function store()
     {
+        $this->validate($this->request, $this->getValidationRules());
+
         $model = $this->model::create($this->request->all());
 
         return response()->json($model, 201);
@@ -39,6 +41,8 @@ abstract class CrudController extends Controller
 
     public function update($id)
     {
+        $this->validate($this->request, $this->getValidationRules());
+
         $model = $this->model::findOrFail($id);
         $model->update($this->request->all());
 
@@ -49,5 +53,10 @@ abstract class CrudController extends Controller
     {
         $this->model::findOrFail($id)->delete();
         return response('Deleted Successfully', 200);
+    }
+
+    public function getValidationRules() 
+    { 
+        return []; 
     }
 }

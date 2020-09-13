@@ -8,7 +8,8 @@ use App\Models\Question;
 
 class QuestionsController extends CrudController
 {
-    public function __construct(Question $model, Request $request){
+    public function __construct(Question $model, Request $request)
+    {
         $this->model = $model;
         $this->request = $request;
     }
