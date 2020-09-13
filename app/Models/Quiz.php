@@ -1,18 +1,25 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Quiz extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'quiz';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'city', 'educationType', 'educationInstitute', 'educationCourse'
+        'title', 'category', 'description', 'lang'
     ];
 
     /**
@@ -20,9 +27,7 @@ class User extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-    ];
+    protected $hidden = [];
 
     /**
      * Indicates if the model should be timestamped.

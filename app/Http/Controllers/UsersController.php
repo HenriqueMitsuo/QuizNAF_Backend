@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 
-class UsersController extends Controller
+class UsersController extends CrudController
 {
     public function __construct(User $model, Request $request){
         $this->model = $model;

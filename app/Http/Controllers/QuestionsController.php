@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Question;
+use App\Http\Traits\Callbacks;
+use App\Models\Question;
 
 class QuestionsController extends CrudController
 {
@@ -11,4 +12,12 @@ class QuestionsController extends CrudController
         $this->model = $model;
         $this->request = $request;
     }
+
+    protected function applyFilters(Request $request, $query)
+    {        
+        if ($request->has('quiz_id')) {
+            $query->where('quiz_id', $request->quiz_id);
+        }
+    }
+
 }

@@ -3,15 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\Callbacks;
 
 abstract class CrudController extends Controller
 {
+    use Callbacks;
+
     protected $model;
     protected $request;
 
     public function index()
     {
-        return response()->json($this->model::all());
+        $klass = $this->model;
+
+        $baseQuery = $klass::query();
+
+        $this->callback('applyFilters', $this->request, $baseQuery);
+
+        $dataQuery = clone $baseQuery;
+
+        return response()->json($dataQuery->get());
     }
 
     public function show($id)
