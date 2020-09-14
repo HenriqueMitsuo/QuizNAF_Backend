@@ -14,9 +14,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->post('/register', ['uses' => 'UsersController@store']);
 $router->group(['prefix' => 'api'], function () use ($router) {
-    
+    $router->post('/register', ['uses' => 'UsersController@store']);
 
     $router->group(['prefix' => 'quiz'], function () use ($router){
         $router->get('/', ['uses' => 'QuizController@index']);
