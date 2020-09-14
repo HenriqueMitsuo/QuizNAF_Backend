@@ -14,10 +14,13 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->group(['prefix' => 'api'], function () use ($router) {
-    $router->post('/register', ['uses' => 'UsersController@store']);
 
-    $router->group(['prefix' => 'quiz'], function () use ($router){
+$router->group(['prefix' => 'api'], function () use ($router) {
+
+    $router->post('/register', ['uses' => 'UsersController@store']);
+    $router->post('/login', ['uses' => 'UsersController@login']);
+
+    $router->group(['prefix' => 'quiz', 'middleware' => 'verifyJwt'], function () use ($router){
         $router->get('/', ['uses' => 'QuizController@index']);
         $router->get('/{id}', ['uses' => 'QuizController@show']);
         $router->post('/', ['uses' => 'QuizController@store']);
@@ -25,7 +28,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->delete('/{id}', ['uses' => 'QuizController@delete']);
     });
   
-    $router->group(['prefix' => 'questions'], function () use ($router){
+    $router->group(['prefix' => 'questions', 'middleware' => 'verifyJwt'], function () use ($router){
         $router->get('/', ['uses' => 'QuestionsController@index']);
         $router->get('/{id}', ['uses' => 'QuestionsController@show']);
         $router->post('/', ['uses' => 'QuestionsController@store']);
@@ -33,7 +36,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->delete('/{id}', ['uses' => 'QuestionsController@delete']);
     });
 
-    $router->group(['prefix' => 'users'], function () use ($router){
+    $router->group(['prefix' => 'users', 'middleware' => 'verifyJwt'], function () use ($router){
         $router->get('/{id}', ['uses' => 'UsersController@show']);
         $router->put('/{id}', ['uses' => 'UsersController@update']);
         $router->delete('/{id}', ['uses' => 'UsersController@delete']);

@@ -77,12 +77,12 @@ $app->configure('app');
 // ]);
 
 $app->middleware([
-	'Nord\Lumen\Cors\CorsMiddleware',
+    'Nord\Lumen\Cors\CorsMiddleware',
 ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'verifyJwt' => \App\Http\Middleware\VerifyJWT::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -96,8 +96,8 @@ $app->middleware([
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+// $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register('Nord\Lumen\Cors\CorsServiceProvider');
 
