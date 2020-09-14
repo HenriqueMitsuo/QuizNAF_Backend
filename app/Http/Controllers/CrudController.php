@@ -22,12 +22,12 @@ abstract class CrudController extends Controller
 
         $dataQuery = clone $baseQuery;
 
-        return response()->json($dataQuery->get());
+        return response()->json($dataQuery->get(), 200);
     }
 
     public function show($id)
     {
-        return response()->json($this->model::find($id));
+        return response()->json($this->model::find($id), 200);
     }
 
     public function store()
