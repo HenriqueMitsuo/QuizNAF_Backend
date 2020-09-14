@@ -36,6 +36,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->group(['prefix' => 'users'], function () use ($router){
         $router->get('/{id}', ['uses' => 'UsersController@show']);
+        $router->put('/', ['uses' => 'UsersController@store']);
         $router->put('/{id}', ['uses' => 'UsersController@update']);
         $router->delete('/{id}', ['uses' => 'UsersController@delete']);
     });
