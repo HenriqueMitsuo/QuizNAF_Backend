@@ -58,6 +58,11 @@ class UsersController extends CrudController
             $jwt_token = (new Builder())
                 ->withClaim("name", $userObj->name)
                 ->withClaim("email", $userObj->email)
+                ->withClaim("country", $userObj->country)
+                ->withClaim("city", $userObj->city)
+                ->withClaim("educationType", $userObj->educationType)
+                ->withClaim("educationInstitute", $userObj->educationInstitute)
+                ->withClaim("educationCourse", $userObj->educationCourse)
                 ->issuedAt($current_time)
                 ->expiresAt($current_time + 3600)
                 ->getToken($jwt_signer, new Key($jwt_secret));
