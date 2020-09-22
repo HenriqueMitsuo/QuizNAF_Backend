@@ -64,6 +64,7 @@ class UsersController extends CrudController
                 ->withClaim("educationType", $userObj->educationType)
                 ->withClaim("educationInstitute", $userObj->educationInstitute)
                 ->withClaim("educationCourse", $userObj->educationCourse)
+                ->withClaim("role", $userObj->role)
                 ->issuedAt($current_time)
                 ->expiresAt($current_time + 3600)
                 ->getToken($jwt_signer, new Key($jwt_secret));
