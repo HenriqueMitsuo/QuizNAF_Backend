@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('educationType');
             $table->string('educationInstitute');
             $table->string('educationCourse')->nullable(true);
+            $table->integer('role')->default(0);
         });
     }
 

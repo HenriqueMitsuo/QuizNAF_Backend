@@ -35,6 +35,7 @@ class UsersController extends CrudController
         $newUser->educationType = $this->request->educationType;
         $newUser->educationInstitute = $this->request->educationInstitute;
         $newUser->educationCourse = $this->request->educationCourse;
+        $newUser->role = $this->request->role;
         $newUser->save();
 
         return response()->json(['message' => 'User Created'], 201);
