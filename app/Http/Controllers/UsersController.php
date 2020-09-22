@@ -57,6 +57,7 @@ class UsersController extends CrudController
             $current_time = time();
 
             $jwt_token = (new Builder())
+                ->withClaim("id", $userObj->id)
                 ->withClaim("name", $userObj->name)
                 ->withClaim("email", $userObj->email)
                 ->withClaim("country", $userObj->country)
