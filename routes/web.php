@@ -20,6 +20,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('/register', ['uses' => 'UsersController@store']);
     $router->post('/login', ['uses' => 'UsersController@login']);
 
+    $router->group(['prefix' => 'passwords', 'middleware' => 'verifyJwt'], function () use ($router){
+        $router->put('/{id}', ['uses' => 'UsersController@updatePassword']);
+    });
+
     $router->group(['prefix' => 'quiz', 'middleware' => 'verifyJwt'], function () use ($router){
         $router->get('/', ['uses' => 'QuizController@index']);
         $router->get('/{id}', ['uses' => 'QuizController@show']);
