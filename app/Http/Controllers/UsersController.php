@@ -27,15 +27,9 @@ class UsersController extends CrudController
 
         $newUser = $this->model;
 
-        $newUser->name = $this->request->name;
-        $newUser->email = $this->request->email;
+        $newUser->fill($this->request->all());
         $newUser->password = Hash::make($this->request->password);
-        $newUser->country = $this->request->country;
-        $newUser->city = $this->request->city;
-        $newUser->educationType = $this->request->educationType;
-        $newUser->educationInstitute = $this->request->educationInstitute;
-        $newUser->educationCourse = $this->request->educationCourse;
-        $newUser->role = $this->request->role;
+        
         $newUser->save();
 
         return response()->json(['message' => 'User Created'], 201);
@@ -70,11 +64,23 @@ class UsersController extends CrudController
                 ->expiresAt($current_time + 3600)
                 ->getToken($jwt_signer, new Key($jwt_secret));
 
-            return response()->json(['message' => 'User logged in', 'token' => strval($jwt_token)], 201); 
-        }
-        else {
+            return response()
+                ->json(['message' => 'User logged in', 'token' => strval($jwt_token)], 201); 
+        } else {
             return response()->json(['message' => 'Authentication Error'], 401);
         }
+    }
+
+    public function updatePassword($id) {
+        $this->validate($this->request, [
+            'password' => 'required|max:255',
+        ]);
+
+        $user = $this->model::findOrFail($id);
+        $user->password = Hash::make($this->request->password);
+        $user->save();
+
+        return response()->json(['message' => 'Senha alterada com sucesso'], 200);
     }
 
     /**
