@@ -92,7 +92,7 @@ class UsersController extends CrudController
         $user->role = $this->request->role;
         $user->save();
 
-        return response()->json(['message' => 'Role alterado com sucesso'], 200);
+        return response()->json(['role' => $user->role ], 200);
     }
 
     /**
