@@ -83,6 +83,18 @@ class UsersController extends CrudController
         return response()->json(['message' => 'Senha alterada com sucesso'], 200);
     }
 
+    public function updateRole($id) {
+        $this->validate($this->request, [
+            'role' => 'required|max:11',
+        ]);
+
+        $user = $this->model::findOrFail($id);
+        $user->role = $this->request->role;
+        $user->save();
+
+        return response()->json(['message' => 'Role alterado com sucesso'], 200);
+    }
+
     /**
      *! @Overriding @getValidationRules() Method.
      */

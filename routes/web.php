@@ -23,6 +23,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['prefix' => 'passwords', 'middleware' => 'verifyJwt'], function () use ($router){
         $router->put('/{id}', ['uses' => 'UsersController@updatePassword']);
     });
+    $router->group(['prefix' => 'role', 'middleware' => 'verifyJwt'], function () use ($router){
+        $router->put('/{id}', ['uses' => 'UsersController@updateRole']);
+    });
 
     $router->group(['prefix' => 'quiz', 'middleware' => 'verifyJwt'], function () use ($router){
         $router->get('/', ['uses' => 'QuizController@index']);
