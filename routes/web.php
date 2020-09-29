@@ -41,6 +41,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     });
 
     $router->group(['prefix' => 'users', 'middleware' => 'verifyJwt'], function () use ($router){
+        $router->get('/', ['uses' => 'UsersController@index']);
         $router->get('/{id}', ['uses' => 'UsersController@show']);
         $router->put('/{id}', ['uses' => 'UsersController@update']);
         $router->delete('/{id}', ['uses' => 'UsersController@delete']);
